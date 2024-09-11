@@ -1,0 +1,27 @@
+(defun collatz-len (n)
+    (let ((cnt 0))
+        (loop
+            (setf cnt (+ cnt 1))
+            (if (oddp n)
+                (setf n (+ (* 3 n) 1))
+                (setf n (/ n 2))
+           )
+           (when (= n 1) (return cnt))
+        )
+    )
+)
+
+(defun euler-14 ()
+    (let ((maxl 0) (y 0))
+        (loop for x from 1 below 1000000 do
+            (let ((l (collatz-len x)))
+                (if (> l maxl) (setf maxl l y x))
+            )
+        )
+        (values y maxl)
+    )
+)
+
+(multiple-value-bind (a b) (euler-14)
+    (format t "~A ~A~%" a b)
+)
