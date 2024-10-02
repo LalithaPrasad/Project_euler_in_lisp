@@ -1,0 +1,20 @@
+(defconstant size 1001)
+(defvar *matrix* (make-array (list size size) :initial-element 0))
+(defun init-spiral ()
+  (let ((dr (list 0 1 0 -1)) (dc (list -1 0 1 0))
+							 (rcent (floor size 2)) (ccent (floor size 2))
+							 (r 0) (c (- size 1)) 
+							 (k 0) (v (* size size)))
+	(setf (aref *matrix* rcent ccent) 1)
+	(setf (aref *matrix* r c) v)
+	(loop do
+		  (let ((tr (+ r (nth k dr))) (tc (+ c (nth k dc))))
+			(when (and (= tr rcent) (= tc ccent)) (loop-finish))
+			(cond 
+			  ((or (< tr 0) (>= tr size) (< tc 0) (>= tc size) (/= 0 (aref *matrix* tr tc))) (setf k (rem (+ k 1) 4)))
+			  (t (setf r tr c tc v (1- v)) (setf (aref *matrix* r c) v)))))))
+(defun euler-28 ()
+  (let ((funcall (init-spiral)))
+	(1- (apply #'+ (loop for i from 0 below size collect (+ (aref *matrix* i i) (aref *matrix* i (- (1- size) i))))))))
+
+(format t "~d~%" (euler-28))
