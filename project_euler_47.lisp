@@ -8,10 +8,10 @@
 
 (defun euler-47 (n)
   (cond
-	((/= 4 (length (dpf n))) (euler-47 (+ n 1)))
-	((/= 4 (length (dpf (+ n 1)))) (euler-47 (+ n 2)))
-	((/= 4 (length (dpf (+ n 2)))) (euler-47 (+ n 3)))
 	((/= 4 (length (dpf (+ n 3)))) (euler-47 (+ n 4)))
+	((/= 4 (length (dpf (+ n 2)))) (euler-47 (+ n 3)))
+	((/= 4 (length (dpf (+ n 1)))) (euler-47 (+ n 2)))
+	((/= 4 (length (dpf n))) (euler-47 (+ n 1)))
 	(t n)))
 
 (format t "~A~%" (euler-47 2))
