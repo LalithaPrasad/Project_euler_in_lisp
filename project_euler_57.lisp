@@ -1,0 +1,16 @@
+(defun euler-57 ()
+  (labels ((num-digits (n)
+					   (if (zerop n)
+						 0
+						 (+ 1 (num-digits (floor n 10)))))
+		   (ngd (n d)
+				(> (num-digits n) (num-digits d))))
+	(let ((cnt 0))
+	  (do ((p 1 (+ p q q))
+		   (q 1 (+ p q))
+		   (n 1 (1+ n)))
+		((> n 1000))
+		(if (ngd p q) (incf cnt)))
+	  cnt)))
+
+(format t "~A~%" (euler-57))
