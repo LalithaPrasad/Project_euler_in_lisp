@@ -13,8 +13,7 @@
 		   (loop do
 				 (let ((l (1- side)))
 				   (loop for i from 1 to 4 do
-						 (if (is-prime (incf v l))
-						   (incf p)))
+						 (if (is-prime (incf v l)) (incf p)))
 				   (incf n 4))
 				 (if (< (/ p n) 0.1) (return-from euler-58 side))
 				 (incf side 2)))))
